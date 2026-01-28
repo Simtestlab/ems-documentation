@@ -1,7 +1,7 @@
 # Energy Management System - Feature List
 
 ## 1. Real-Time Monitoring Dashboard
-### Live Energy Flow Visualization
+### 1.1 Live Energy Flow Visualization
 
 - Interactive Sankey diagram showing energy flows between:
     - Solar -> Load / Battery / Grid
@@ -10,16 +10,109 @@
 - Real-time power values (kW) on each flow path
 - Directional arrows with animated flow intensity
 
-### Multi-Site Overview (Multiple Locations)
-- Map View with site markers
-- Site status indicators (normal, warning, fault)
-- Quick-view cards for each site showing:
-    - Current generation
-    - Battery SoC
-    - Grid import/export
-    - Local consumption
+#### Example of a Sankey Reference
+![Sankey Diagram](./sankai.png)
+[Reference](https://sketchplanations.com/sankey-diagram)
 
-### Instantaneous Metrics Display
+#### Example Design Reference
+![Reference Diagram](./design-reference.png)
+
+Note: The above mentioned image, is soley for reference the actual UI will be developed seperately.
+
+#### Description:
+
+**Flow Direction**:
+
+- **Solar -> Load**: When solar generation > 0 and building is consuming
+- **Solar -> Battery**: When solar generation > load demand
+- **Solar -> Grid**: When solar > (load + battery charging capacity)
+- **Battery -> Load**: When battery discharging to meet load
+- **Battery -> Grid**: When battery exporting to grid for revenue
+- **Grid -> Load**: When grid supplying power to building
+- **Grid -> Battery**: When grid charging battery
+
+#### Flow thickness calculation
+Thickness = (Power in kW / Max System Capacity) * Max Line Width
+
+#### Animation Logic
+- Flow Speed: Proportional to power (faster = more power)
+- Direction = arrow direction on line
+- Particle density = power density (more particles = more power)
+
+### 1.2 Multi-Site Overview (Multiple Locations)
+#### Map View
+- Interactive map showing all our Solar+BESS locations
+- Color-coded markers for each site
+- Click any marker -> zooms in and shows site details
+- Cluster display when multiple sites are close together
+
+#### Site status indicators
+- Green = Normal operation
+- Yellow = Warning (e.g., low battery, underperformance)
+- Red = Fault (equipment failure, communication lost)
+- Gray = Offline/maintenance
+
+#### Quick-View Site Cards
+Each site has a clickable card showing:
+
+- Site Name
+- Status: 🟢 Normal
+- Last Updated: 2 min ago
+
+#### Key Metrics Grid:
+┌─────────────────┬─────────────────┐
+│ ☀️ Solar        │ 🔋 Battery      │
+│ 5.2 kW          │ 65% SoC         │
+│ 42 kWh today    │ 3.1 kW flow     │
+├─────────────────┼─────────────────┤
+│ ⚡ Grid         │ 🏠 Consumption   │
+│ Import: 0.5 kW  │ 3.6 kW          │
+│ Export: 2.1 kW  │ 28 kWh today    │
+└─────────────────┴─────────────────┘
+
+#### Bottom Section:
+- Today's savings
+- Self-consumption
+- Quick actions: "View Details" | "Control" | "Reports"
+
+#### Layout Options:
+┌─────────────────┬────────────────────────────────┐
+│                 │                                │
+│   MAP VIEW      │   SITE CARDS LIST             │
+│   with all      │   (scrollable)                │
+│   locations     │   • Site 1 card               │
+│                 │   • Site 2 card               │
+│                 │   • Site 3 card               │
+└─────────────────┴────────────────────────────────┘
+
+#### Bulk Operations
+- Select multiple sites -> apply same command
+- Compare sites -> side-by-side charts
+- Group sites -> by region, type, or owner
+
+#### Summary Bar
+The summary bar should include these parameters:
+
+- Total Portfolio: 5 Sites
+- Total Generation: 25.6 kW
+- Total Savings Today: ₹620
+- Total Battery Capacity: 250 kWh
+- Overall Status: 4 Normal, 1 Warning
+
+#### Alert Summary Panel
+Active Alerts (3):
+
+- Site A: Battery low (25%)
+- Site B: Inverter efficiency dropped
+- Site C: Communication lost (investigating)
+
+#### Perfomance Highlights:
+
+- **Best performer**: Chennai Factory (85% self-consumption)
+- **Needs attention**: Mumbai Office (40% battery health)
+- **Most Savings**: Bangalore Plant ($200 today)
+
+### 1.3 Instantaneous Metrics Display
 - Solar Generation (kW, kWh today)
 - Battery Status (SoC %, power kW, temperature)
 - Grid Interaction (Import/Export kW, net balance)
