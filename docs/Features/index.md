@@ -40,6 +40,10 @@ Thickness = (Power in kW / Max System Capacity) * Max Line Width
 - Particle density = power density (more particles = more power)
 
 ### 1.2 Multi-Site Overview (Multiple Locations)
+![Multisite-dashboard-reference-image](./multi-site-dashboard.png)
+
+Note: This is for a representation of the below description, the actual UI maybe designed similarly but not exactly.
+
 #### Map View
 - Interactive map showing all our Solar+BESS locations
 - Color-coded markers for each site
@@ -60,30 +64,12 @@ Each site has a clickable card showing:
 - Last Updated: 2 min ago
 
 #### Key Metrics Grid:
-┌─────────────────┬─────────────────┐
-│ ☀️ Solar        │ 🔋 Battery      │
-│ 5.2 kW          │ 65% SoC         │
-│ 42 kWh today    │ 3.1 kW flow     │
-├─────────────────┼─────────────────┤
-│ ⚡ Grid         │ 🏠 Consumption   │
-│ Import: 0.5 kW  │ 3.6 kW          │
-│ Export: 2.1 kW  │ 28 kWh today    │
-└─────────────────┴─────────────────┘
+![Metrics Grid](./metrics-grid.png)
 
 #### Bottom Section:
 - Today's savings
 - Self-consumption
 - Quick actions: "View Details" | "Control" | "Reports"
-
-#### Layout Options:
-┌─────────────────┬────────────────────────────────┐
-│                 │                                │
-│   MAP VIEW      │   SITE CARDS LIST             │
-│   with all      │   (scrollable)                │
-│   locations     │   • Site 1 card               │
-│                 │   • Site 2 card               │
-│                 │   • Site 3 card               │
-└─────────────────┴────────────────────────────────┘
 
 #### Bulk Operations
 - Select multiple sites -> apply same command
