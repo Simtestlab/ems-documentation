@@ -17,3 +17,7 @@ The System Architecture is organized into three distince zones:
 1. [State Machine Logic](./state-machine.md)
 
 2. [Communication Interface](./communication-interface.md)
+
+## Cloud Logic: Ingestion & Storage
+
+3. [FastAPI - Real Time Hub](./fastAPI.md)
