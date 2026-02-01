@@ -2,6 +2,9 @@
 
 This webpage contains the documentation of Energy Management System Analysis, Reference and Development Guide.
 
+## Implementation Architecture
+- [Phase-1 Setup and State Machine Commands](./Implementation/phase-1.md)
+
 ## Implementation Analysis
 - [Minimum Viable Product Roadmap](./Analysis/mvp.md)
 - [EMS Dashboard Feature List](./Analysis/ui-implementation.md)
