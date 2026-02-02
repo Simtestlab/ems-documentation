@@ -21,3 +21,5 @@ The System Architecture is organized into three distince zones:
 ## Cloud Logic: Ingestion & Storage
 
 3. [FastAPI - Real Time Hub](./fastAPI.md)
+
+4. [History & Management](./django.md)

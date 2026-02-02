@@ -3,7 +3,7 @@
 This webpage contains the documentation of Energy Management System Analysis, Reference and Development Guide.
 
 ## Implementation Architecture
-- [Phase-1 Setup and State Machine Commands](./Implementation/phase-1.md)
+- [Phase-1 Setup and State Machine Commands](./Implementation%20Architecture/index.md)
 
 ## Implementation Analysis
 - [Minimum Viable Product Roadmap](./Analysis/mvp.md)
