@@ -24,6 +24,10 @@ The System Architecture is organized into three distince zones:
 
 4. [History & Management](./django.md)
 
+5. [Websocket Implementation Architecture](./websocket-implementation.md)
+
+6. [Websocket Client Integration](./websocket.md)
+
 ## Dashboard & Integration
 
-5. [Frontend Developer Guide](./dashboard.md)
+7. [Frontend Developer Guide](./dashboard.md)
