@@ -13,7 +13,7 @@ To exchange real-time telemetry, both the Edge Device (Pi) and the Frontend Dash
 
 - **Base Endpoint**: wss://api.domain.com/ws/device/{device_id}
 
-- **Authentication**: Handled via Headers/Tokens (Refer here.)
+- **Authentication**: Handled via Headers/Tokens
 
 ## Edge Implementation (Pi)
 
