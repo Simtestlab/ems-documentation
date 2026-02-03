@@ -157,3 +157,57 @@ The dashboard must react visually to the *system_status_state*:
 | Time to Full  | `(Capacity_Wh × (1 − SOC%)) / Current_Power` | **“45m to full”** (Only when Charging)         |
 | Cycle Status  | `system_status.state`                        | **“Status: CHARGING”** (Mapped directly)       |
 
+## Site Map Tab
+
+![Site Map](site-map-dashboard.png)
+
+## Layout Architecture
+
+### Structure
+- Container: Use a Flexbox container with a fixed height (e.g., *calc(100vh - 64px*))
+
+- Left Column (60%): The Map Canvas. It renders the geographical "Pins".
+
+- Right Column (40%): The information Panel. It renders the data for the currently selected pin.
+
+### The Interactive Map
+
+To visualize fleet distribution and provide high-level status at a glance.
+
+- **Data Source**: *SITE_MAP_DATA* (Static Array)
+
+- **Rendering Logic**:
+    1. Iterate through the *SITE_MAP_ARRAY* array.
+    2. Place a marker at *{lat, lng}* for each site.
+    3. **Color Coding**:
+        - **Green**: System is healthy (*state != ERROR && timestamp < 60s*)
+        - **Red**: System is in trouble (*state == ERROR or error* or *error_flags > 0*)
+        - **Gray**: System is offline (timestamp > 60s).
+    4. **Interaction**: While clicking a site it should render the Details panel in the right side as shown in the above layout.
+
+### Details Panel
+It shows the "Identity", "health", and "pulse" of the selected site as shown in the wireframe.
+
+#### Site Identity (Static Data)
+
+- **Data Source**: *SITE_MAP_DATA* (Config file).
+
+- **Fields**: Site Name, Location, Capacity, Status.
+
+The above fields are static data so they can remain unchanged.
+
+#### Live Health (Telemetry)
+
+- **Data Source**: Websocket Stream (*system_status* object)
+
+- **Fields**: Connection Quality, Last Active and Mode should be updated from the websocket each second.
+
+#### Energy Pulse (Telemetry)
+
+- **Data Source**: Websocket Stream (*battery* & *grid* object).
+
+- **Fields**: Battery Status, Grid Status, Active Issues.
+
+These fields should be rendered from the Websocket that emits the battery data.
+
+**Note**: We need to utilize a store management tool (like redux or zustand) to handle the data efficiently across component persistantly.
