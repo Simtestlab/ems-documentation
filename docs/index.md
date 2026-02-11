@@ -1,4 +1,4 @@
-# Sim-EMS Documentation
+# Sim-EMS
 
 This webpage contains the documentation of Energy Management System Analysis, Reference and Development Guide.
 
