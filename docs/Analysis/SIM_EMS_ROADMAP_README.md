@@ -1,9 +1,4 @@
 # Sim EMS — Implementation Roadmap (Python + FastAPI + PostgreSQL + React)
-
-**Document Type**: Roadmap + Technical Specification (Implementation-Ready)  
-**Date**: January 20, 2026  
-**Primary Tech Stack**: Python, FastAPI, PostgreSQL (TimescaleDB optional), React  
-
 ---
 
 ## 0) Executive Summary
@@ -398,3 +393,4 @@ If you want, I can generate:
 - a matching folder scaffold (edge/backend/ui) aligned to this roadmap
 - an initial API contract (OpenAPI) for ingestion + commands
 - a minimal database schema (Alembic migrations)
+
