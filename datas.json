@@ -1,0 +1,85 @@
+{
+    "device_id": "ems_001",
+    "timestamp": "2026-02-10T14:25:30.123456",
+
+    "battery": {
+        "soc": 0.85,
+        "soh": 0.98,
+        "voltage": 380.5,
+        "current": 12.3,
+        "power_kw": 4.68,
+        "temperature_c": 28.5,
+        "cycle_count": 342,
+        "faults": [],
+        "warnings": ["HIGH_TEMP"],
+        "cell_voltage_min": 3.75,
+        "cell_voltage_max": 3.78,
+        "cell_voltage_delta": 0.03,
+        "cell_temp_min": 27.2,
+        "cell_temp_max": 29.8,
+        "remaining_capacity_kwh": 8.5,
+        "total_capacity_kwh": 10.0,
+        "time_to_full_min": 45
+    },
+
+    "grid": {
+        "frequency": 50.02,
+        "voltage": 230.5,
+        "current": 8.5,
+        "power_kw": 1.96,
+        "power_factor": 0.98,
+        "price": 0.15,
+        "status": "connected",
+        "energy_imported_kwh": 12.5,
+        "energy_exported_kwh": 3.2,
+        "peak_demand_kw": 6.8
+    },
+
+    "solar": {
+        "power_ac_kw": 6.5,
+        "power_dc_kw": 6.8,
+        "voltage_dc": 385.0,
+        "current_dc": 17.7,
+        "irradiance_w_m2": 850,
+        "panel_temp_c": 45.2,
+        "efficiency": 0.956,
+        "energy_today_kwh": 28.5,
+        "performance_ratio": 0.956
+    },
+
+    "inverter": {
+        "priority": "solar_first",
+        "action": "charging_battery",
+        "reason": "excess_solar_available",
+        "operating_state": "grid_tie",
+        "utilization": 0.65,
+        "efficiency": 0.956,
+        "backup_ready": true
+    },
+
+    "load": {
+        "total_load_kw": 1.82,
+        "critical_load_kw": 0.8,
+        "peak_load_today_kw": 5.2,
+        "energy_consumed_today_kwh": 15.8
+    },
+
+    "system": {
+        "system_state": "CHARGING",
+        "system_mode": "AUTO",
+        "error_flags": [],
+        "warning_flags": ["BATTERY_HIGH_TEMP"],
+        "uptime_seconds": 864000,
+        "wifi_rssi": -45,
+        "firmware_version": "v2.1.5"
+    },
+
+    "economics": {
+        "tariff_current": 0.15,
+        "tariff_type": "tou",
+        "cost_today": 1.88,
+        "savings_today": 4.28,
+        "revenue_today": 0.38,
+        "net_cost_today": -2.78
+    }
+}
