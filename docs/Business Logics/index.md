@@ -1,9 +1,9 @@
-# Technical Specification Document: EMS Core Features
+# EMS Core Features
 
 ## Core Infrastructure & Device Connectivity
-1. **Modbus Protocol Adapter** - Read/write registers via Modbus TCP/RTU; device-profile based.
+1. **[Modbus Protocol Adapter](./protocol-adapter.md)** - Read/write registers via Modbus TCP/RTU; device-profile based.
 
-2. **Edge Core Cycle** - Deterministic 1s (configurable) execution loop (scheduler).
+2. **[Edge Core Cycle](./edge-core-cycle.md)** - Deterministic 1s (configurable) execution loop (scheduler).
 
 3. **Edge Configuration Sync** - Edge pulls latest device mappings and controller parameters from cloud.
 
