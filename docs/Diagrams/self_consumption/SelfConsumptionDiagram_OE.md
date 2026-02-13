@@ -1,5 +1,4 @@
 self consumption logic from open ems
-
 ```mermaid
 flowchart TD
     %% Global Styles
