@@ -5,9 +5,9 @@
 
 2. **[Edge Core Cycle](./edge-core-cycle.md)** - Deterministic 1s (configurable) execution loop (scheduler).
 
-3. **Edge Configuration Sync** - Edge pulls latest device mappings and controller parameters from cloud.
+3. **[Edge Configuration Sync](./edge-configuration-sync.md)** - Edge pulls latest device mappings and controller parameters from cloud.
 
-4. **Command Dispatch** - Bidirectional WebSocket: send setpoints from cloud/dashboard to edge.
+4. **[Command Dispatch](./command_dispatch.md)** - Bidirectional WebSocket: send setpoints from cloud/dashboard to edge.
 
 5. **CAN Bus Support** - Driver for BMS communication
 
