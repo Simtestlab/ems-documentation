@@ -9,7 +9,7 @@
 
 4. **[Command Dispatch](./command_dispatch.md)** - Bidirectional WebSocket: send setpoints from cloud/dashboard to edge.
 
-5. **CAN Bus Support** - Driver for BMS communication
+5. **[CAN Bus Support](./can-bus-support.md)** - Driver for BMS communication
 
 6. **SunSpec Compilance** - Auto-discovery and parsing of SunSpec-compilant inverters.
 

@@ -68,6 +68,30 @@ Quality:    GOOD
 
 ---
 
+### Time Synchronization & Clock Skew Monitoring
+
+**The Gap:** High‑precision timestamps are useless if the edge device's clock drifts. Even a 5‑second skew invalidates temporal alignment with cloud timestamps and grid signals.
+
+**Solution – Mandatory Time Synchronization:**
+- All edge devices **must** run an NTP client (Network Time Protocol) synchronized to a reliable time source (e.g., cloud‑based NTP servers or local GPS).
+- For applications requiring microsecond precision (e.g., synchrophasors), **PTP (Precision Time Protocol, IEEE 1588)** may be used with hardware timestamping support.
+
+**Monitoring & Alarming:**
+- The EMS cloud periodically compares its own time with the edge's reported timestamp (from heartbeats or telemetry).
+- If the deviation exceeds **100 ms**, a **Clock Skew Alarm** is raised.
+- The alarm is visible in the dashboard and can trigger notifications (email, SMS) to operators.
+- Edges with persistent skew may be flagged for maintenance (e.g., faulty RTC battery, NTP misconfiguration).
+
+**Implementation Requirements:**
+- Edge heartbeat messages must include a timestamp generated immediately before transmission.
+- Cloud records arrival time and calculates offset.
+- Offset is tracked over time; sustained offset >100 ms triggers alarm.
+- Optionally, edges can self‑monitor their NTP synchronization status and report it as a diagnostic channel (e.g., `edge/NTP_Status`).
+
+**Impact:** Ensures that all timestamps across distributed edges are mutually coherent, enabling accurate event correlation and historical analysis.
+
+---
+
 ## Device Profile Specification
 
 Profiles are stored as JSON (or YAML) and include **optimization directives** for the scan engine.

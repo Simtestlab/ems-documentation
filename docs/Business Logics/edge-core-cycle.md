@@ -15,16 +15,44 @@ The Edge Core Cycle & Scheduler is the **execution engine** of the EMS Edge node
 
 ## Layer Descriptions & Critical Enhancements
 
-### Layer 1 – Cycle Timer
+### Layer 1 – Deterministic Cycle Timer & Runtime Environment
 
-**Role:** Generate a precise, periodic wake‑up signal.  
-**Standard function:** `time.sleep(interval)`.  
-**Real‑world challenge:** Simple sleeps accumulate error; OS scheduling introduces jitter.
+**Role:** Generate a precise, periodic wake‑up signal and maintain a deterministic execution environment.
 
-**Enhancements:**
-- **Deadline‑aware scheduling:** Calculate next wake time absolutely (`target = start + N*period`) and sleep until that instant.
-- **Jitter logging:** Record deviation from ideal schedule; expose as diagnostic channel.
-- **Period configuration:** Adjustable per edge (100–5000 ms) via cloud configuration.
+**Standard function:** `time.sleep(interval)` on a standard OS.
+
+**Real‑world challenge:** 
+- Standard sleep relies on the system "Wall Clock" (susceptible to NTP shifts) and the default OS scheduler (susceptible to preemption by background tasks).
+- Python's internal Garbage Collector (GC) and OS memory paging can introduce random latencies of 10–100ms ("Jitter"), violating control loop requirements.
+
+#### 1. Monotonic Deadline Scheduling
+
+Instead of relative sleeps, the timer uses a **Monotonic Clock** (e.g., `time.perf_counter`) which is immune to system time changes (NTP).
+
+- **Absolute Deadline Calculation:** The next wake-up time is calculated algebraically: `target_wake_time = cycle_start_time + (cycle_count * period_sec)`.
+- **Drift Compensation:** By sleeping until an absolute point in time, any execution jitter from the previous cycle is mathematically eliminated in the next, preventing cumulative drift.
+
+#### 2. Soft Real-Time OS Priority (`SCHED_FIFO`)
+
+The Edge Core process elevates its own priority to bypass standard time-sharing scheduling.
+
+- **Mechanism:** Uses the `sched_setscheduler` syscall to request **SCHED_FIFO** policy with high priority (e.g., 99).
+- **Benefit:** This ensures the kernel preempts almost all other user-space processes (logging, updates, networking) immediately when the Core Cycle needs to run.
+- **Hard Real-Time Option:** For sub-millisecond requirements, the software supports deployment on a **PREEMPT_RT** patched Linux kernel.
+
+#### 3. Deterministic Memory Management
+
+To prevent non-deterministic pauses caused by memory operations, the runtime environment is hardened:
+
+- **Memory Locking (`mlockall`):** The process forces all current and future memory pages to stay in physical RAM, preventing the OS from "swapping" memory to disk (which causes massive latency spikes).
+- **Manual Garbage Collection (GC):** Automatic Python GC is **disabled**. Instead, the cycle supervisor manually triggers `gc.collect()` only during the "Slack Time" (idle time) at the end of a cycle, ensuring no "Stop-the-World" pauses occur during critical control logic.
+
+#### 4. Jitter Monitoring
+
+The supervisor continuously measures the delta between the _ideal_ wake-up time and the _actual_ execution start time.
+
+- **Diagnostic Channel:** `sys_core/CycleJitter` (microseconds).
+- **Alarming:** If Jitter consistently exceeds a safety threshold (e.g., 10% of cycle period), a **High Jitter Alarm** is raised to indicate CPU starvation.
 
 ---
 
