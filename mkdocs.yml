@@ -53,3 +53,54 @@ plugins:
 extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  
+  - Analysis:
+    - Overview: Analysis/index.md
+    - EMS Explanation: Analysis/ems-explanation.md
+    - System Architecture: Analysis/sim-ems-system-architecture.md
+    - Energy Parameters: Analysis/parameter.md
+    - State Machine Modes: Analysis/state-machine-modes.md
+    - Dashboard Components: Analysis/dashboard-component.md
+    - UI Implementation: Analysis/ui-implementation.md
+    - MVP Scope: Analysis/mvp.md
+    - Folder Structure: Analysis/folder-structure.md
+    - Self-Consumption: Analysis/self-consumption-definition.md
+    - Comprehensive Analysis: Analysis/COMPREHENSIVE_EMS_ANALYSIS_AND_CONSOLIDATED_DESIGN.md
+    - Project Roadmap: Analysis/SIM_EMS_ROADMAP_README.md
+  
+  - Implementation Architecture:
+    - Overview: Implementation Architecture/index.md
+    - State Machine: Implementation Architecture/state-machine.md
+    - Communication Interface: Implementation Architecture/communication-interface.md
+    - WebSocket Implementation: Implementation Architecture/websocket-implementation.md
+    - WebSocket Details: Implementation Architecture/websocket.md
+    - FastAPI Backend: Implementation Architecture/fastAPI.md
+    - Django Backend: Implementation Architecture/django.md
+    - Dashboard Integration: Implementation Architecture/dashboard.md
+  
+  - Business Logics:
+    - Overview: Business Logics/index.md
+    - Edge Core Cycle: Business Logics/edge-core-cycle.md
+    - Protocol Adapter: Business Logics/protocol-adapter.md
+  
+  - References:
+    - EMS Controller:
+      - Features: References/ems-controller/ems-features.md
+    - MyEMS:
+      - Overview: References/myems/myems-overview.md
+      - Features: References/myems/myems-features.md
+      - Components Overview: References/myems/components-overview.md
+      - Components List: References/myems/myems-components-list.md
+      - Business Logics: References/myems/myems-business-logics.md
+      - UI Components: References/myems/myems-UI-components.md
+    - OpenEMS:
+      - Overview: References/openems/openems-overview.md
+      - Core Architecture: References/openems/openems-core-architecture.md
+      - Modules: References/openems/openems-modules.md
+      - Backend Modules: References/openems/openems-backend-modules.md
+      - Communication Bridge: References/openems/openems-communication-bridge-modules.md
+    - Theme:
+      - Configuration: References/theme/theme.md
