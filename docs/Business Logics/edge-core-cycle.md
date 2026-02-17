@@ -36,7 +36,7 @@ Instead of relative sleeps, the timer uses a **Monotonic Clock** (e.g., `time.pe
 
 The Edge Core process elevates its own priority to bypass standard time-sharing scheduling.
 
-- **Mechanism:** Uses the `sched_setscheduler` syscall to request **SCHED_FIFO** policy with high priority (e.g., 99).
+- **Mechanism:** Uses the `sched_setscheduler` syscall to request **SCHED_FIFO** policy with high priority (e.g., 99). This requires the `CAP_SYS_NICE` capability (or root).
 - **Benefit:** This ensures the kernel preempts almost all other user-space processes (logging, updates, networking) immediately when the Core Cycle needs to run.
 - **Hard Real-Time Option:** For sub-millisecond requirements, the software supports deployment on a **PREEMPT_RT** patched Linux kernel.
 
@@ -44,18 +44,15 @@ The Edge Core process elevates its own priority to bypass standard time-sharing 
 
 To prevent non-deterministic pauses caused by memory operations, the runtime environment is hardened:
 
-- **Memory Locking (`mlockall`):** The process forces all current and future memory pages to stay in physical RAM, preventing the OS from "swapping" memory to disk (which causes massive latency spikes).
-- **Manual Garbage Collection (GC):** Automatic Python GC is **disabled**. Instead, the cycle supervisor manually triggers `gc.collect()` only during the "Slack Time" (idle time) at the end of a cycle, ensuring no "Stop-the-World" pauses occur during critical control logic.
+- **Memory Locking (`mlockall`):** The process forces all current and future memory pages to stay in physical RAM, preventing the OS from swapping memory to disk (which causes massive latency spikes). Requires `CAP_IPC_LOCK`.
+- **Manual Garbage Collection (GC):** Automatic Python GC is **disabled** (`gc.disable()`). The Cycle Supervisor manually triggers `gc.collect()` only during **slack time** – the idle interval after all controllers have finished and before the next cycle begins. This ensures that no "Stop‑the‑World" pause occurs during critical control logic.
 
 #### 4. Jitter Monitoring
 
 The supervisor continuously measures the delta between the _ideal_ wake-up time and the _actual_ execution start time.
 
 - **Diagnostic Channel:** `sys_core/CycleJitter` (microseconds).
-- **Alarming:** If Jitter consistently exceeds a safety threshold (e.g., 10% of cycle period), a **High Jitter Alarm** is raised to indicate CPU starvation.
-
----
-
+- **Alarming:** If jitter consistently exceeds a safety threshold (e.g., 10% of cycle period), a **High Jitter Alarm** is raised to indicate CPU starvation or inadequate real‑time configuration.
 ### Layer 2 – Channel Snapshot
 
 **Role:** Freeze all input channels at a single logical instant.  
@@ -142,6 +139,9 @@ The supervisor continuously measures the delta between the _ideal_ wake-up time 
 | **Controller time‑budget compliance** | ≥99% of executions finish within budget | Per‑controller execution timer      |
 | **Overrun detection**           | 100% of overruns ≥1 ms logged              | Time delta > period                |
 | **Scheduler configuration**     | Changes applied within 1 cycle             | Test with cloud‑pushed config       |
+| **GC pause duration**         | ≤ 5 ms (99th percentile)                    | Measured during manual collection (`sys_core/GC_Time`) |
+| **Memory lock success**       | 100% (process must lock all pages)          | `sys_core/MemoryLocked` flag true after startup       |
+| **Max scheduler latency**     | < 100 µs (with PREEMPT_RT)                   | Cyclictest or custom instrumentation                   |
 
 ---
 
@@ -157,6 +157,7 @@ The scheduler configuration is part of the **edge’s device profile** stored in
     "period_ms": 1000,
     "supervisor": {
       "overrun_alert_threshold": 2,
+      "jitter_alert_threshold_ms": 100,
       "auto_recovery": true
     }
   },
