@@ -17,7 +17,7 @@ This feature extends the EMS beyond traditional Modbus connectivity, allowing it
 
 The CAN BMS integration follows a **layered architecture** that separates concerns and provides clear interfaces between physical hardware, operating system, EMS services, and higher‑level applications. The diagram below illustrates the main layers and data flow.
 
-![Can Bus Support Diagram](./can-protocol-diagram.png)
+![Can Bus Support Diagram](.core/can-protocol-diagram.png)
 ---
 
 ## Layer Descriptions

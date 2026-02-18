@@ -203,7 +203,7 @@ The following appendices provide concrete examples of device profiles derived fr
 
 ## TRUMPF TruConvert AC 3025 Inverter
 
-Based on the *[TRUMPF TruConvert AC 3025 Operator's Manual](../static/TRUMPF_Manual_TruConvert_AC3025.pdf)*, this profile includes a subset of the most important Modbus registers for monitoring and control. The full register map is extensive; here we focus on the key parameters needed for basic operation and energy management.
+Based on the *[TRUMPF TruConvert AC 3025 Operator's Manual](../../static/TRUMPF_Manual_TruConvert_AC3025.pdf)*, this profile includes a subset of the most important Modbus registers for monitoring and control. The full register map is extensive; here we focus on the key parameters needed for basic operation and energy management.
 
 ### Device Overview
 
@@ -362,7 +362,7 @@ Based on the *[TRUMPF TruConvert AC 3025 Operator's Manual](../static/TRUMPF_Man
 
 ## SDM630 Energy Meter
 
-Based on the *[SDM630 Modbus Protocol v2.0](../static/sdm630_modbus_protocol_v2.0.pdf)* document, this profile defines the most common energy‑metering parameters. The SDM630 is a widely used three‑phase energy meter with Modbus RTU interface.
+Based on the *[SDM630 Modbus Protocol v2.0](../../static/sdm630_modbus_protocol_v2.0.pdf)* document, this profile defines the most common energy‑metering parameters. The SDM630 is a widely used three‑phase energy meter with Modbus RTU interface.
 
 ### Device Overview
 

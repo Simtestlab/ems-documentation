@@ -2,35 +2,37 @@
 
 ## Core Infrastructure & Device Connectivity
 
-1. **[Modbus Protocol Adapter](./modbus-protocol-adapter.md)** - Read/write registers via Modbus TCP/RTU; device-profile based.
+1. **[Modbus Protocol Adapter](./Core/modbus-protocol-adapter.md)** - Read/write registers via Modbus TCP/RTU; device-profile based.
 
-2. **[Edge Core Cycle](./edge-core-cycle.md)** - Deterministic 1s (configurable) execution loop (scheduler).
+2. **[Edge Core Cycle](./Core/edge-core-cycle.md)** - Deterministic 1s (configurable) execution loop (scheduler).
 
-3. **[Edge Configuration Sync](./edge-configuration-sync.md)** - Edge pulls latest device mappings and controller parameters from cloud.
+3. **[Edge Configuration Sync](./Core/edge-configuration-sync.md)** - Edge pulls latest device mappings and controller parameters from cloud.
 
-4. **[Command Dispatch](./command_dispatch.md)** - Bidirectional WebSocket: send setpoints from cloud/dashboard to edge.
+4. **[Command Dispatch](./Core/command_dispatch.md)** - Bidirectional WebSocket: send setpoints from cloud/dashboard to edge.
 
-5. **[CAN Bus Support](./can-bus-support.md)** - Driver for BMS communication
+5. **[CAN Bus Support](./Core/can-bus-support.md)** - Driver for BMS communication
 
-6. **[SunSpec Compilance](./sunspec-compliance.md)** - Auto-discovery and parsing of SunSpec-compilant inverters.
+6. **[SunSpec Compilance](./Core/sunspec-compliance.md)** - Auto-discovery and parsing of SunSpec-compilant inverters.
 
-## Device Abstraction & Virtualisation
+## Device Abstraction Layer & Virtualization
 
-1. **ESS Abstraction** - Standardised battery channels: SOC, power, limits, setpoints.
+1. **Definition of [Device Abstraction Layer](./Abstraction/device_abstraction_layer.md)**
 
-2. **Grid/Site Meter** - Unified import/export meter;
+2. **[ESS Abstraction](../Business%20Logics/Abstraction/ess_abstraction.md)** - Standardised battery channels: SOC, power, limits, setpoints.
 
-3. **PV Inverter Abstraction** - Active power, energy, voltage and current.
+3. **[Grid/Site Meter](../Business%20Logics/Abstraction/grid_meter.md)** - Unified import/export meter;
 
-4. **Load Meter Abstraction** - Consumption meter, enables net/gross analysis.
+4. **PV Inverter Abstraction** - Active power, energy, voltage and current.
 
-5. **Advanced SOC Estimation** - Kalman filter (EKF) with voltage correction and improved accuracy.
+5. **Load Meter Abstraction** - Consumption meter, enables net/gross analysis.
 
-6. **Machine Learning SOC** - LSTM/GRU model trained on site-specific BMS data; adaptive to ageing.
+6. **Advanced SOC Estimation** - Kalman filter (EKF) with voltage correction and improved accuracy.
 
-7. **Reactive Power Capability** - Inverter channels for Q setpoint, power factor, Volt-VAR curves.
+7. **Machine Learning SOC** - LSTM/GRU model trained on site-specific BMS data; adaptive to ageing.
 
-8. **Virtual Meter** - Computer channels (sum of PV, wind, net load)
+8. **Reactive Power Capability** - Inverter channels for Q setpoint, power factor, Volt-VAR curves.
+
+9. **Virtual Meter** - Computer channels (sum of PV, wind, net load)
 
 ## Control & Optimisation
 
