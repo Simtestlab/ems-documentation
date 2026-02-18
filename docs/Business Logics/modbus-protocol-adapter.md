@@ -6,7 +6,22 @@ The Modbus Protocol Adapter is the **foundation of all real‑time data acquisit
 - **Manages** the communication lifecycle with hundreds of heterogeneous field devices (inverters, meters, BMS).
 - **Guarantees** temporal coherence and deterministic update rates required for closed‑loop control.
 
+This document includes two real‑world device profiles as examples: a **TRUMPF TruConvert AC 3025 inverter** (Modbus TCP) and an **Eastron SDM630 energy meter** (Modbus RTU). These illustrate how manufacturer documentation is translated into working configurations.
+
 ---
+
+## Architectural Overview
+
+The Modbus Protocol Adapter is one component within the larger EMS edge gateway. The diagram below illustrates its position in the complete data flow, from physical devices to the cloud.
+
+![Modbus Communication Protocol](modbus-communication-protocol-layer.png)
+
+The adapter handles the bottom three layers of the edge software stack:
+- **Hardware Interfaces** (Ethernet, RS‑485) – physical connection to devices.
+- **Modbus Protocol Adapter** (HAL, Scan Engine, Normalization) – core translation and polling logic.
+- **Device Abstraction Layer** – normalized channels consumed by higher‑level EMS functions.
+
+Above these, the **Core EMS** (Cycle, Controllers, Command Dispatcher) and **Cloud Platform** complete the system.
 
 ## Layer Descriptions & Critical Enhancements
 
@@ -94,7 +109,7 @@ Quality:    GOOD
 
 ## Device Profile Specification
 
-Profiles are stored as JSON (or YAML) and include **optimization directives** for the scan engine.
+Profiles are stored as JSON (or YAML) and include **optimization directives** for the scan engine. For concrete examples, see the [TRUMPF inverter profile](#trumpf-truconvert-ac-3025-inverter) and [SDM630 meter profile](#sdm630-energy-meter) at the end of this document.
 
 ```json
 {
