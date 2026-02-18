@@ -22,7 +22,7 @@
 
 3. **[Grid/Site Meter](../Business%20Logics/Abstraction/grid_meter.md)** - Unified import/export meter;
 
-4. **PV Inverter Abstraction** - Active power, energy, voltage and current.
+4. **[PV Inverter Abstraction](../Business%20Logics/Abstraction/pv_inverter.md)** - Active power, energy, voltage and current.
 
 5. **Load Meter Abstraction** - Consumption meter, enables net/gross analysis.
 
