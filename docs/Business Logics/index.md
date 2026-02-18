@@ -1,6 +1,7 @@
 # EMS Core Features
 
 ## Core Infrastructure & Device Connectivity
+
 1. **[Modbus Protocol Adapter](./modbus-protocol-adapter.md)** - Read/write registers via Modbus TCP/RTU; device-profile based.
 
 2. **[Edge Core Cycle](./edge-core-cycle.md)** - Deterministic 1s (configurable) execution loop (scheduler).
@@ -11,7 +12,7 @@
 
 5. **[CAN Bus Support](./can-bus-support.md)** - Driver for BMS communication
 
-6. **SunSpec Compilance** - Auto-discovery and parsing of SunSpec-compilant inverters.
+6. **[SunSpec Compilance](./sunspec-compliance.md)** - Auto-discovery and parsing of SunSpec-compilant inverters.
 
 ## Device Abstraction & Virtualisation
 
