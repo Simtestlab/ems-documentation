@@ -24,7 +24,7 @@
 
 4. **[PV Inverter Abstraction](../Business%20Logics/Abstraction/pv_inverter.md)** - Active power, energy, voltage and current.
 
-5. **Load Meter Abstraction** - Consumption meter, enables net/gross analysis.
+5. **[Load Meter Abstraction](../Business%20Logics/Abstraction/load-meter.md)** - Consumption meter, enables net/gross analysis.
 
 6. **Advanced SOC Estimation** - Kalman filter (EKF) with voltage correction and improved accuracy.
 

@@ -6,9 +6,13 @@
 The **Load Meter Abstraction** defines a uniform set of channels for representing the electrical consumption (load) of a site. Whether the load is measured by a dedicated physical meter (e.g., a submeter on a manufacturing line) or calculated as a virtual meter from other measurements, the rest of the EMS sees a **standardized interface** for consumption data.
 
 This abstraction enables:
+
 - **Controllers** (self‑consumption, peak shaving) to understand how much power is being used on site.
+
 - **Protocol adapters** to translate vendor‑specific registers into a common format.
+
 - **Simulators** to generate realistic load profiles during development.
+
 - **Net/gross analysis** by comparing load with generation (PV) and grid exchange.
 
 The load meter is typically a **read‑only** device – it measures consumption but does not accept commands. (Some advanced meters may support remote disconnect, but that is out of scope for the basic abstraction.)
@@ -30,7 +34,9 @@ The load meter is typically a **read‑only** device – it measures consumption
 
 ## Standardized Load Meter Channels
 
-All load meter channels reside in the **Device Abstraction Layer** and follow the naming convention `load_{instance_id}/{channel_name}`. For example: `load_main/ActivePower`, `load_line1/EnergyTotal`. If only one load meter exists, simply `load/ActivePower` is used.
+All load meter channels reside in the **Device Abstraction Layer** and follow the naming convention `load_{instance_id}/{channel_name}`. 
+
+For example: `load_main/ActivePower`, `load_line1/EnergyTotal`. If only one load meter exists, simply `load/ActivePower` is used.
 
 ### Input Channels (Telemetry – read‑only)
 
