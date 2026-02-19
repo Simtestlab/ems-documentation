@@ -100,9 +100,9 @@ The PowerArm E-Track 4G Edge is a compact IoT gateway designed to convert Modbus
 
 ## Dealer Details
 
-**Name**: Logics PowerAMR Pvt. Ltd,
-**Address**: 1st Floor, A-55, Sector 16, Noida, Uttar Pradesh 201301,
-**Mail**: info@poweramr.in, support@poweramr.in
-**Phone**: +91-8076963066
+- **Name**: Logics PowerAMR Pvt. Ltd,
+- **Address**: 1st Floor, A-55, Sector 16, Noida, Uttar Pradesh 201301,
+- **Mail**: info@poweramr.in, support@poweramr.in
+- **Phone**: +91-8076963066
 
 ---
