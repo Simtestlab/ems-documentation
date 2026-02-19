@@ -94,15 +94,15 @@ The PowerArm E-Track 4G Edge is a compact IoT gateway designed to convert Modbus
 - **No Dual SIM**: No redundancy for cellular connectivity.
 - **Configuration Tools**: Less mature than Moxa’s; may require more manual setup.
 
-- **Data Sheet**: [Click Here](../static/FLINT_WDG85_DS_ARN_E_v1.1.3.pdf)
+- **Data Sheet**: [Click Here](../static/E-Track-%204G-Edge.pdf)
 
-- **[Product Link](https://www.aeronsystems.com/iot-products/data-gateway/flint-wdg85/)**
+- **[Product Link](https://poweramr.in/datalogger)**
 
 ## Dealer Details
 
-**Name**: Aeron Systems,
-**Address**: Unit No.106, on First Level ,No.7, Prestige Centre Point, Edward Road, Bangalore – 560052, Karnataka, India
-**Mail**: sales@aeronsystems.com
-**Phone**: +91-9168613672
+**Name**: Logics PowerAMR Pvt. Ltd,
+**Address**: 1st Floor, A-55, Sector 16, Noida, Uttar Pradesh 201301,
+**Mail**: info@poweramr.in, support@poweramr.in
+**Phone**: +91-8076963066
 
 ---
