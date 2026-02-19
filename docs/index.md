@@ -57,7 +57,7 @@ Business logic implementation and edge processing.
 
 ---
 
-### [Developer Guide](Developer%20Guide/)
+### Developer Guide
 
 Developer resources and guides.
 
@@ -66,9 +66,11 @@ Developer resources and guides.
 
 ---
 
-### [References](References/)
+### References
 
 External system references and inspiration.
+
+- **[IOT Gateways](./IOT%20Device/index.md)**
 
 #### [EMS Controller](References/ems-controller/)
 - **[EMS Features](References/ems-controller/ems-features.md)** - Standard EMS feature set
