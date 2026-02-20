@@ -16,7 +16,7 @@
 
 ## Device Abstraction Layer & Virtualization
 
-1. **Definition of [Device Abstraction Layer](./Abstraction/device_abstraction_layer.md)**
+1. **Definition of [Device Abstraction Layer](./Abstraction/index.md)**
 
 2. **[ESS Abstraction](../Business%20Logics/Abstraction/ess_abstraction.md)** - Standardised battery channels: SOC, power, limits, setpoints.
 
@@ -26,13 +26,19 @@
 
 5. **[Load Meter Abstraction](../Business%20Logics/Abstraction/load-meter.md)** - Consumption meter, enables net/gross analysis.
 
-6. **Advanced SOC Estimation** - Kalman filter (EKF) with voltage correction and improved accuracy.
+6. **Virtual Meter** - Computer channels (sum of PV, wind, net load)
 
-7. **Machine Learning SOC** - LSTM/GRU model trained on site-specific BMS data; adaptive to ageing.
+#### Planned features for next phase
 
-8. **Reactive Power Capability** - Inverter channels for Q setpoint, power factor, Volt-VAR curves.
+7. **Advanced SOC Estimation** - Kalman filter (EKF) with voltage correction and improved accuracy.
 
-9. **Virtual Meter** - Computer channels (sum of PV, wind, net load)
+8. **Machine Learning SOC** - LSTM/GRU model trained on site-specific BMS data; adaptive to ageing.
+
+9. **Reactive Power Capability** - Inverter channels for Q setpoint, power factor, Volt-VAR curves.
+
+## Command Dispatcher
+
+6. **[Command Dispatcher](../Business%20Logics/Command%20Dispatcher/index.md)** - Responsible for routing **user-initiated commands** from the cloud UI to the appropriate edge device.
 
 ## Control & Optimisation
 

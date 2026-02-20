@@ -3,6 +3,13 @@
 Welcome to the comprehensive documentation for the **SIM Energy Management System**. This documentation covers system analysis, architecture design, implementation guides, and reference materials for building a real-time energy management platform.
 
 ---
+## Implementation Architecture and feature list
+
+- **[Business Logics](Business%20Logics/index.md)**
+- **[Device Abstraction Layer](Business%20Logics/Abstraction/index.md)**
+- **[Command Dispatcher](Business%20Logics/Command%20Dispatcher/index.md)**
+
+---
 
 ##  Documentation Structure
 
@@ -45,15 +52,6 @@ Technical architecture and implementation details.
   - Grid, Battery, Inverter, Load, Energy metrics
   - Multi-site scalability design
   - TypeScript interfaces and data contracts
-
----
-
-### [Business Logics](Business%20Logics/index.md)
-
-Business logic implementation and edge processing.
-
-- **[Edge Core Cycle](Business%20Logics/edge-core-cycle.md)** - Edge device control loop
-- **[Protocol Adapter](Business%20Logics/protocol-adapter.md)** - Communication protocol handling
 
 ---
 
