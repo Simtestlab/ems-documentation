@@ -26,7 +26,7 @@
 
 5. **[Load Meter Abstraction](../Business%20Logics/Abstraction/load-meter.md)** - Consumption meter, enables net/gross analysis.
 
-6. **Virtual Meter** - Computer channels (sum of PV, wind, net load)
+6. **[Virtual Meter](./Abstraction/virtual-meter.md)** - Computer channels (sum of PV, wind, net load)
 
 #### Planned features for next phase
 
