@@ -38,7 +38,27 @@
 
 ## Command Dispatcher
 
-6. **[Command Dispatcher](../Business%20Logics/Command%20Dispatcher/index.md)** - Responsible for routing **user-initiated commands** from the cloud UI to the appropriate edge device.
+1. **[Command Dispatcher](../Business%20Logics/Command%20Dispatcher/index.md)** - Responsible for routing **user-initiated commands** from the cloud UI to the appropriate edge device.
+
+2. **[Cloud-Site Dispatcher Service](../Business%20Logics/Command%20Dispatcher/cloud-side-dispatcher.md)**
+
+3. **[Edge-Site Dispatcher Service](../Business%20Logics/Command%20Dispatcher/edge-side-dispatcher.md)**
+
+4. **[Request Channel](../Business%20Logics/Abstraction/ui_request_channel.md)**
+
+5. **[Command Validation](../Business%20Logics/Command%20Dispatcher/command-validation.md)**
+
+6. **[Offline Command Queue and TTL](../Business%20Logics//Command%20Dispatcher/offline-command-queue.md)**
+
+7. **[Acknowledgement Flow](../Business%20Logics/Command%20Dispatcher/acknowledgement-flow.md)**
+
+8. **[Security and Rate Limiting](../Business%20Logics/Command%20Dispatcher/security-and-rate-limit.md)**
+
+9. Controller Consumption & Arbitration
+
+10. Command Payload Schema
+
+11. Audit logging & Command Traceability
 
 ## Control & Optimisation
 
