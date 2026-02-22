@@ -8,7 +8,7 @@ Welcome to the comprehensive documentation for the **SIM Energy Management Syste
 - **[Business Logics](Business%20Logics/index.md)**
 - **[Device Abstraction Layer](Business%20Logics/Abstraction/index.md)**
 - **[Command Dispatcher](Business%20Logics/Command%20Dispatcher/index.md)**
-
+- **[Forecast Models](Developer%20Guide/ForecastModels/index.md)**
 ---
 
 ##  Documentation Structure

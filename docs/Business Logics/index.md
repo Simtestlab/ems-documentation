@@ -54,7 +54,7 @@
 
 8. **[Security and Rate Limiting](../Business%20Logics/Command%20Dispatcher/security-and-rate-limit.md)**
 
-9. Controller Consumption & Arbitration
+9. **[Controller Consumption & Arbitration](../Business%20Logics/Command%20Dispatcher/controller_consumption.md)**
 
 10. Command Payload Schema
 
