@@ -56,9 +56,9 @@
 
 9. **[Controller Consumption & Arbitration](../Business%20Logics/Command%20Dispatcher/controller_consumption.md)**
 
-10. Command Payload Schema
+10. **[Command Payload Schema](../Business%20Logics/Command%20Dispatcher/command-payload.md)**
 
-11. Audit logging & Command Traceability
+11. **[Audit logging & Command Traceability](../Business%20Logics/Command%20Dispatcher/audit-logging.md)**
 
 ## Control & Optimisation
 
