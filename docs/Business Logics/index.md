@@ -1,5 +1,147 @@
 # EMS Core Features
 
+## EMS MVP Features
+
+After completing the six phases, your Minimum Viable Product (MVP) will include a fully functional, production‑ready **Device Abstraction Layer (DAL)** and **Command Dispatcher**, running on a simulated edge (Raspberry Pi) with realistic battery, grid, PV, and load simulators. The system will be secure, observable, and capable of handling manual commands with full reliability. All core components are built and integrated; only hardware protocols, advanced controllers (balancing, peak shaving), and multi‑site management are deferred to later phases.
+
+Below is the complete list of features delivered in the MVP.
+
+---
+
+## 1. Device Abstraction Layer (DAL)
+
+- **Core Channel Store** – Thread‑safe in‑memory dictionary with `set_channel`, `get_channel`, `snapshot()`.
+- **Channel Categories:**
+  - **Input channels** – telemetry from devices (e.g., `battery_1/Soc`, `grid/ActivePower`).
+  - **Output channels** – setpoints to devices (e.g., `battery_1/SetActivePower`).
+  - **Request channels** – user commands from UI (`ui_requests/battery_1_power`).
+  - **Acknowledgment channels** – final execution status (`ack/battery_1_power`).
+- **Naming Convention** – consistent hierarchical naming (`device_type_instance/channel`).
+- **Timestamping** – every channel update carries a timestamp.
+- **Atomic Snapshot** – consistent view of all input channels at cycle start.
+- **Thread Safety** – supports concurrent producers/consumers.
+
+---
+
+## 2. Smart Simulators (Edge)
+
+- **Battery Simulator** – stateful model with SOC, capacity, power limits, efficiency. Responds to `SetActivePower`, updates telemetry, respects Min/Max SOC.
+- **Grid Meter Simulator** – generates realistic import/export patterns (configurable).
+- **PV Inverter Simulator** – generates solar production based on time of day.
+- **Load Meter Simulator** – generates consumption patterns (optional, can be derived).
+- **Simulator Framework** – all simulators run as separate threads, updating DAL every second.
+
+---
+
+## 3. Edge Core Cycle & Arbitration
+
+- **Deterministic 1‑Second Loop** – async loop with absolute deadline scheduling.
+- **Snapshot** – captures DAL snapshot at cycle start.
+- **Scheduler** – loads controllers from config, runs them in priority order.
+- **Manual Override Controller** – reads request channels, revalidates, writes to output channels, clears request, writes final status to ack channel.
+- **Last‑Write‑Wins Arbitration** – if multiple controllers write same output, last one prevails.
+- **Telemetry Uplink** – sends full DAL snapshot to cloud every cycle via WebSocket; cloud stores in TimescaleDB.
+
+---
+
+## 4. Command Dispatcher – Basic (Phase 4)
+
+- **Cloud‑Side Dispatcher (Basic)**
+  - WebSocket server for UI connections (query‑string or first‑message auth).
+  - Static validation against device profiles (static limits, enums).
+  - Routing to online edge (simple connection registry).
+  - Immediate acknowledgments (`received`/`rejected`).
+- **Edge‑Side Dispatcher (Basic)**
+  - WebSocket client with first‑message API key auth.
+  - Lightweight validation (device existence, request channel mapping).
+  - Writes commands to request channels in DAL.
+  - Sends immediate `received` ack to cloud.
+- **Device Profiles (Static)**
+  - JSON definitions with static limits, enums, channel names.
+  - Fetched by edge at startup (simple HTTP).
+- **Command Payload Schema** – standard JSON format for all commands.
+- **UI Hookup** – existing Next.js dashboard connects to cloud WebSocket, sends commands, displays immediate acks.
+
+---
+
+## 5. Command Dispatcher – Advanced (Phase 5)
+
+- **Dynamic Limit Validation**
+  - Cloud queries TimescaleDB for latest telemetry (e.g., `MaxChargePower`).
+  - Staleness check (e.g., 30s) – rejects if telemetry is stale.
+  - Computes effective limits and validates command.
+- **Acknowledgment Channels** – controllers write final status to `ack/` channels.
+- **Final Acknowledgment Forwarding** – edge dispatcher monitors `ack/` channels and forwards final status to cloud.
+- **In‑Flight Watchdog**
+  - Redis sorted set tracks commands sent to online edges.
+  - Background worker sends `failed: edge_timeout` if no final ack within 5s.
+- **Offline Command Queue**
+  - Redis LIST per edge (FIFO) stores commands when edge offline.
+  - Per‑command TTL enforced at dequeue.
+  - Mandatory background expiry worker sends `failed: timeout_in_queue` when commands expire while offline.
+- **Queue Overflow Protection** – rejects commands when queue length exceeds limit (e.g., 10,000).
+
+---
+
+## 6. Security & Audit Logging (Phase 6)
+
+- **Authentication**
+  - User JWT (Django‑issued) validated on connection and per command.
+  - Edge API keys (hashed) authenticated via first‑message frame.
+  - Session revocation via Redis pub/sub (Django publishes user ID, cloud kills WebSockets).
+- **Rate Limiting**
+  - Redis token buckets: 10 commands/sec per user, 100 acks/sec per edge.
+  - IP‑based limits for HTTP endpoints.
+- **Replay Protection**
+  - Redis cache of `command_id`s with 60s TTL.
+  - Timestamp freshness check (≤ 60s).
+- **Input Sanitization** – Pydantic models with strict schema (extra fields rejected).
+- **CORS** – restricted to UI domain.
+- **Audit Logging**
+  - Structured JSON logs at all waypoints (cloud, queue, edge) with `command_id` correlation.
+  - Edge logs use rotating files, shipped via Filebeat to central aggregator (ELK/Datadog).
+  - NTP requirement for edges; clock drift warnings logged.
+
+---
+
+## 7. UI Dashboard (Next.js)
+
+- **Live Single‑Line Diagram** – WebSocket connection to cloud telemetry stream.
+- **Command Forms** – send setpoints (battery power), mode changes, view immediate and final status.
+- **Queue Notifications** – shows `queued`, `timeout_in_queue`, `edge_timeout`, and final execution status.
+- **Telemetry Display** – real‑time charts for grid, PV, battery SOC, load.
+- **Login Page** – JWT authentication integrated with Django.
+
+---
+
+## 8. Cloud Infrastructure
+
+- **FastAPI WebSocket Servers** – for UI commands and edge telemetry.
+- **TimescaleDB** – stores all telemetry (used for dynamic validation and history).
+- **Redis** – used for offline queues, in‑flight watchdog, rate limiting, replay cache, session revocation.
+- **Django Auth Service** – issues JWT, manages users, publishes revocation events.
+- **Log Aggregator** – ELK or Datadog stack for audit logs.
+
+---
+
+## What Is NOT in the MVP (Future Phases)
+
+- Real hardware protocol adapters (Modbus, CAN, SunSpec) – these will replace simulators later.
+- Multiple controllers (balancing, peak shaving) – the controller team will integrate them after MVP using the established interfaces.
+- Multi‑tenancy (organisation/site hierarchy) – Phase 7 optional.
+- Edge configuration sync (cloud‑managed config) – Phase 7 optional.
+- Advanced SOC estimation (Kalman, ML) – future.
+- Reactive power control (Volt‑VAR) – future.
+- Predictive controllers (ToU, forecasting) – future.
+- Real‑time alarms (threshold alarms, email notifications) – future.
+- Edge heartbeat monitoring and Raft‑based HA – future.
+
+---
+
+## Summary
+
+The MVP delivered after Phase 6 is a complete, secure, and observable EMS edge and cloud system with simulated devices, manual control, and a polished UI. It includes every feature documented for the Device Abstraction Layer and Command Dispatcher (static/dynamic validation, offline queues, acknowledgments, watchdog, audit logging, rate limiting). This foundation is ready to integrate real hardware protocols and advanced control logic in subsequent phases.
+
 ## Core Infrastructure & Device Connectivity
 
 1. **[Modbus Protocol Adapter](./Core/modbus-protocol-adapter.md)** - Read/write registers via Modbus TCP/RTU; device-profile based.
