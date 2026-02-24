@@ -39,3 +39,63 @@ markdown_extensions:
 
 plugins:
   - search
+
+nav:
+  - Home: index.md
+  - Analysis:
+    - Analysis/ems-explanation.md
+    - Analysis/self-consumption-definition.md
+    - Analysis/sim-ems-system-architecture.md
+    - Analysis/state-machine-modes.md
+    - Analysis/mvp.md
+    - Analysis/ui-implementation.md
+    - Analysis/folder-structure.md
+    - Analysis/dashboard-component.md
+    - Analysis/parameter.md
+    - Analysis/UNIFIED_EMS_DEVELOPMENT_ROADMAP.md
+  - Implementation Architecture:
+    - Implementation Architecture/index.md
+    - Implementation Architecture/django.md
+    - Implementation Architecture/fastAPI.md
+    - Implementation Architecture/communication-interface.md
+    - Implementation Architecture/dashboard.md
+    - Implementation Architecture/state-machine.md
+    - Implementation Architecture/websocket.md
+    - Implementation Architecture/websocket-implementation.md
+  - Developer Guide:
+    - Developer Guide/index.md
+    - Forecast Models:
+      - Developer Guide/ForecastModels/index.md
+      - Developer Guide/ForecastModels/load-demand-forecasting.md
+      - Developer Guide/ForecastModels/solar-wind-generation-forecasting.md
+      - Developer Guide/ForecastModels/algorithm-comparison.md
+    - Analytics:
+      - Developer Guide/Analytics/index.md
+      - Developer Guide/Analytics/telemetry-schema.md
+      - Developer Guide/Analytics/aggregation-overview.md
+      - Developer Guide/Analytics/aggregation-workflow.md
+      - Developer Guide/Analytics/dashboard-implementation.md
+    - WebSocket:
+      - Developer Guide/Websocket/index.md
+    - BESS Financial Model:
+      - Developer Guide/Bess-FinModel-Formulas/Formulas_Documentation.md
+  - References:
+    - EMS Controller:
+      - References/ems-controller/ems-features.md
+    - MyEMS:
+      - References/myems/myems-overview.md
+      - References/myems/myems-features.md
+      - References/myems/components-overview.md
+      - References/myems/myems-components-list.md
+      - References/myems/myems-business-logics.md
+      - References/myems/myems-UI-components.md
+    - OpenEMS:
+      - References/openems/openems-overview.md
+      - References/openems/openems-core-architecture.md
+      - References/openems/openems-modules.md
+      - References/openems/openems-backend-modules.md
+      - References/openems/openems-communication-bridge-modules.md
+    - Theme:
+      - References/theme/theme.md
+    - BESS Prediction:
+      - References/BESS_Prediction/index.md
